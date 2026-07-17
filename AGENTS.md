@@ -5,7 +5,18 @@ This guide provides instructions and conventions for AI agents (such as Google A
 *Note: This guide is being built out iteratively. Details for each section will be populated in subsequent passes.*
 
 ## 1. Project Layout
-*To be filled in: Details about primary ENVO edit files and key directories.*
+- **Primary Development File**: `src/envo/envo-edit.owl`
+  - All manual or automated ontology edits must be made directly in this file or via ROBOT templates in the modules directory.
+  - ⚠️ **CRITICAL RESTRICTION**: Never edit release/compiled files directly (such as `envo.owl`, `envo.obo`, or `envo.json` in either the repository root or the `src/envo/` directory). These are derived files generated during the release build.
+- **Assigned ID Ranges**: `src/envo/envo-idranges.owl`
+  - This file stores the designated numeric ID ranges assigned to active curators and editors to prevent ID collisions. AI agents must strictly use IDs allocated within their permitted range.
+- **ROBOT & Pattern Modules**: `src/envo/modules/`
+  - Contains CSV templates and modules used by the ROBOT tool for automated term generation and bulk imports.
+- **Local XML Catalog**: `src/envo/catalog-v001.xml`
+  - Defines local URIs and mappings for resolving imported ontologies without requiring active internet connectivity.
+- **Curation & Process Documentation**: `wiki/`
+  - Houses comprehensive, up-to-date guides on annotations, relations, term creation, and ROBOT workflows.
+
 
 ## 2. Querying the Ontology
 *To be filled in: Commands and patterns for searching ENVO's OWL functional syntax.*
