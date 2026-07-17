@@ -194,7 +194,18 @@ All term definitions and significant comments in ENVO must be substantiated with
 
 
 ## 10. Troubleshooting
-*To be filled in: Validating OWL files and addressing compilation/reasoning errors.*
+- **ROBOT Template Compilation Errors**:
+  - If the CSV template fails to compile, append the `-vvv` verbose flag to the `robot template` command to view the full Java stack trace and pinpoint the exact row or cell formatting error:
+    ```bash
+    robot template -vvv --template modules/temporary_robot_template.csv -i envo-edit.owl ...
+    ```
+- **Reasoner or Profile Validation Failures**:
+  - If `make test` fails, check the console output to identify unsatisfiable classes or syntax profile violations.
+  - To trace low-level parsing issues in the main OWL file, you can run:
+    ```bash
+    robot convert -vvv -i envo-edit.owl -f ofn -o /dev/null
+    ```
+
 
 ## 11. Obsoleting Terms
 *To be filled in: De-axiomatizing and replacing obsolete concepts in ENVO.*
