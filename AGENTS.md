@@ -156,7 +156,21 @@ To maintain quality and logical consistency across all curated concepts, ENVO en
 
 
 ## 7. Publications & Citations
-*To be filled in: Citation rules, references, and fetching publication details.*
+All term definitions and significant comments in ENVO must be substantiated with reliable literature or expert citations.
+
+- **Finding References**:
+  - Always search literature databases or the web to locate the correct PMIDs, DOIs, or persistent glossary URLs. Do not guess citations.
+- **Reference Formats**:
+  - **URLs/IRIs**: Strongly preferred for web glossaries and open databases (e.g., `https://cloudatlas.wmo.int/...`).
+  - **PMIDs / DOIs**: Preferred for scholarly publications.
+  - **ORCIDs**: Used to credit expert individual knowledge (e.g., `https://orcid.org/0000-0002-4366-3088`).
+  - **Strings**: Literals like book ISBNs can be used if no persistent URI exists.
+- **Specifying Citations in ROBOT Templates**:
+  - Map verbatim text to `definition source` (`IAO_0000119`).
+  - Map paraphrased/adapted text to `database_cross_reference` (`oboInOwl:hasDbXref`).
+  - **Multiple References**: Combine multiple citations in a single ROBOT template cell using the pipe (`|`) delimiter without spaces:
+    - *Example*: `https://www.ec.gc.ca/meteo-weather/|http://glossary.ametsoc.org/wiki/Main_Page`
+
 
 ## 8. GitHub Contribution Process
 *To be filled in: Branches, PR creation rules, commit message standards, and agent signatures.*
