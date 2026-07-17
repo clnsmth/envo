@@ -68,7 +68,64 @@ Before starting any ontology edits, agents must perform a series of semantic che
 
 
 ## 5. Edits & Compilation
-*To be filled in: Procedures for making edits, running ROBOT templates, and merging changes.*
+In ENVO, editing is strictly performed using the ROBOT template pipeline (CSV-based curation). We do not use Protégé. All template compilation, merging, and testing must be executed from `/src/envo/`.
+
+### 1. Git Curation Workflow (ROBOT-based)
+Always isolate your changes in a dedicated git branch matching the issue number.
+1. **Synchronize upstream**:
+   ```bash
+   git pull
+   ```
+2. **Checkout a branch**:
+   ```bash
+   git checkout -b issue-xyz
+   ```
+3. **Prepare the CSV Template**:
+   - Create or edit a CSV template file in `src/envo/modules/` (e.g., `temporary_robot_template.csv`).
+   - Line endings must be **LF (not CRLF)** and special characters must be properly UTF-8 encoded.
+4. **Compile the Template**:
+   - Convert the CSV template into a temporary OWL module:
+   ```bash
+   robot template --template modules/temporary_robot_template.csv -i envo-edit.owl --prefix "RO:http://purl.obolibrary.org/obo/RO_" --prefix "ENVO:http://purl.obolibrary.org/obo/ENVO_"  --ontology-iri "http://purl.obolibrary.org/envo/modules/temporary_robot_template.owl" convert --format ofn -o modules/temporary_robot_template.owl
+   ```
+5. **Merge into the Edit File**:
+   - Merge the OWL template back into the primary development file (`envo-edit.owl`):
+   ```bash
+   robot merge --input envo-edit.owl --input modules/temporary_robot_template.owl --collapse-import-closure false convert --format ofn --output envo-edit.owl
+   ```
+6. **Compile & Run Local Tests**:
+   - Run the validation and build tasks inside `/src/envo/` to invoke the reasoner and check for logical inconsistencies (any unsatisfiable classes reasoning under `owl:Nothing` will fail the test):
+   ```bash
+   make test
+   ```
+7. **Commit & Push**:
+   - Commit the updated `envo-edit.owl` along with the source CSV template, and push to create a PR:
+   ```bash
+   git add src/envo/envo-edit.owl src/envo/modules/temporary_robot_template.csv
+   git commit -m "Run robot merge to add template terms #xyz"
+   git push origin issue-xyz
+   ```
+
+### 2. Defining Relationship Axioms in ROBOT Templates
+To add logical links between classes in ROBOT templates, use the `subclass axiom` column:
+- **Class Expressions**: Class expressions containing multiple terms must be wrapped in parentheses.
+  - *Format*: `('property' some 'value')`
+- **Main Constituent Relation**: When describing the main constituent of an environmental material (`ENVO_00010483`), use the `'composed primarily of'` (`RO_0002473`) relation to map to other material entities or ChEBI chemical entities:
+  - *Example subclass axiom cell*: `('composed primarily of' some 'water ice')` or `('composed primarily of' some 'water')` (where `water` is `CHEBI_15377`).
+
+### 3. Compilation & Local Testing Commands
+Execute these verification targets inside the `src/envo/` directory:
+- **To run standard syntax, profile, and reasoner tests**:
+  ```bash
+  cd src/envo
+  make test
+  ```
+- **To run full CI checks locally**:
+  ```bash
+  cd src/envo
+  make continuous_integration_test
+  ```
+
 
 ## 6. Ontology Format Guidelines
 *To be filled in: Standard naming conventions, ID structure (8 digits), and required term fields.*
