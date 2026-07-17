@@ -35,7 +35,33 @@ inaccurate. Always use `runoak` against the SQLite DB.
 - ONLY use the methods above for searching the ontology.  
 
 ## 3. Before Making Edits
-*To be filled in: Checklist and requirements before starting any ontology edits.*
+Before starting any ontology edits, agents must perform a series of semantic checks and research steps to maintain the high logical integrity of ENVO.
+
+- **1. Read the Request & Gather Context**:
+  - Carefully read the instruction or issue. If a GitHub issue is mentioned, view its detailed thread and discussion:
+    ```bash
+    gh issue view <issue-number>
+    ```
+  - If a literature reference (such as a PMID, DOI, or URL) is provided, ALWAYS fetch and read its abstract or full text to ensure definitions are accurate and scientific.
+
+- **2. Check for Duplicates**:
+  - NEVER create a term without first confirming that it does not already exist in the ontology (either as a primary label or an exact synonym).
+  - Use the local `runoak` search to scan the SemSQL database:
+    ```bash
+    runoak -i sqlite:src/envo/envo.db search 'your term name'
+    ```
+
+- **3. Verify Parent Classes**:
+  - Always check the proposed parent terms for logical consistency and scientific accuracy.
+  - Run the `ancestors` command on candidate parent terms to inspect their position in the upper-level hierarchy:
+    ```bash
+    runoak -i sqlite:src/envo/envo.db ancestors ENVO:NNNNNNNN
+    ```
+
+- **4. Match Existing Design Patterns**:
+  - Check `src/envo/patterns/` for any existing Dead Simple OWL Design Patterns (DOSDP) YAML templates that might apply to your term (e.g., `biome.yaml`, `ecosystem.yaml`, `atmospheric_material_subtype.yaml`).
+  - If a relevant pattern is found, any new classes or assertions must strictly follow the schema and logical definitions specified in that pattern.
+
 
 ## 4. Editors Guide
 *To be filled in: High-level principles for editing ENVO.*
