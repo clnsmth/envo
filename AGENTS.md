@@ -189,7 +189,9 @@ All term definitions and significant comments in ENVO must be substantiated with
 
 
 ## 9. Handling GitHub Issues and Requests
-*To be filled in: Tool usage with 'gh' to interact with issues and pull requests.*
+- Use `gh` to read and write issues/PRs
+- Sign all commits and PRs as `@clnsmth-ontology-agent`
+
 
 ## 10. Troubleshooting
 *To be filled in: Validating OWL files and addressing compilation/reasoning errors.*
