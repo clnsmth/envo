@@ -64,7 +64,8 @@ Before starting any ontology edits, agents must perform a series of semantic che
 
 
 ## 4. Editors Guide
-*To be filled in: High-level principles for editing ENVO.*
+- Design patterns are in `src/envo/patterns/`
+
 
 ## 5. Edits & Compilation
 *To be filled in: Procedures for making edits, running ROBOT templates, and merging changes.*
