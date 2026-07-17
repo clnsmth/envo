@@ -208,7 +208,10 @@ All term definitions and significant comments in ENVO must be substantiated with
 
 
 ## 11. Other Metadata & Annotations
-*To be filled in: Nano-crediting, dc:creator ORCIDs, and subset tagging.*
+- Link back to the issue you are dealing with using the `term_tracker_item`
+- All terms should have definitions, with at least one definition xref, ideally a PMID, DOI, or URL
+- Sign terms with the nano-credited individual's ORCID using the `created_by` (or `dc:creator`) property
+
 
 ## 12. Relationships & Axioms
 *To be filled in: Usage of relations (e.g., composed primarily of) and restrictions.*
