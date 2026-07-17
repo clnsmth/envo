@@ -207,14 +207,12 @@ All term definitions and significant comments in ENVO must be substantiated with
     ```
 
 
-## 11. Obsoleting Terms
-*To be filled in: De-axiomatizing and replacing obsolete concepts in ENVO.*
-
-## 12. Other Metadata & Annotations
+## 11. Other Metadata & Annotations
 *To be filled in: Nano-crediting, dc:creator ORCIDs, and subset tagging.*
 
-## 13. Relationships & Axioms
+## 12. Relationships & Axioms
 *To be filled in: Usage of relations (e.g., composed primarily of) and restrictions.*
 
-## 14. Logical Definitions
+## 13. Logical Definitions
 *To be filled in: Genus-differentia structures and axiomatization styles.*
+
