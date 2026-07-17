@@ -221,6 +221,7 @@ All term definitions and significant comments in ENVO must be substantiated with
 - always sign your commits `@clnsmth-ontology-agent`
 - create PRs using `gh pr create ...`
 - File PRs with clear descriptions, and sign your PR
+- When filing a Pull Request, you must request review by tagging core ENVO editorial team members (specifically `@pbuttigieg` and `@cmungall`) in a comment on your PR or as PR reviewers, and link back to the corresponding issue number.
 
 
 ## 9. Handling GitHub Issues and Requests
