@@ -1,0 +1,47 @@
+# ENVO Ontology Project Guide for AI Agents
+
+This guide provides instructions and conventions for AI agents (such as Google Antigravity CLI) to edit, query, and contribute to the Environment Ontology (ENVO).
+
+*Note: This guide is being built out iteratively. Details for each section will be populated in subsequent passes.*
+
+## 1. Project Layout
+*To be filled in: Details about primary ENVO edit files and key directories.*
+
+## 2. Querying the Ontology
+*To be filled in: Commands and patterns for searching ENVO's OWL functional syntax.*
+
+## 3. Before Making Edits
+*To be filled in: Checklist and requirements before starting any ontology edits.*
+
+## 4. Editors Guide
+*To be filled in: High-level principles for editing ENVO.*
+
+## 5. Edits & Compilation
+*To be filled in: Procedures for making edits, running ROBOT templates, and merging changes.*
+
+## 6. Ontology Format Guidelines
+*To be filled in: Standard naming conventions, ID structure (8 digits), and required term fields.*
+
+## 7. Publications & Citations
+*To be filled in: Citation rules, references, and fetching publication details.*
+
+## 8. GitHub Contribution Process
+*To be filled in: Branches, PR creation rules, commit message standards, and agent signatures.*
+
+## 9. Handling GitHub Issues and Requests
+*To be filled in: Tool usage with 'gh' to interact with issues and pull requests.*
+
+## 10. Troubleshooting
+*To be filled in: Validating OWL files and addressing compilation/reasoning errors.*
+
+## 11. Obsoleting Terms
+*To be filled in: De-axiomatizing and replacing obsolete concepts in ENVO.*
+
+## 12. Other Metadata & Annotations
+*To be filled in: Nano-crediting, dc:creator ORCIDs, and subset tagging.*
+
+## 13. Relationships & Axioms
+*To be filled in: Usage of relations (e.g., composed primarily of) and restrictions.*
+
+## 14. Logical Definitions
+*To be filled in: Genus-differentia structures and axiomatization styles.*
