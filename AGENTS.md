@@ -173,7 +173,20 @@ All term definitions and significant comments in ENVO must be substantiated with
 
 
 ## 8. GitHub Contribution Process
-*To be filled in: Branches, PR creation rules, commit message standards, and agent signatures.*
+- most requests from users should follow one of two patterns:
+    - you are not confident how to proceed, in which case end with asking a clarifying question (via `gh`)
+    - you are confident how to proceed, you make changes, commit on a branch, and open a PR for the user to review
+- Check existing terms before adding new ones
+- For new terms: provide name, definition, place in hierarchy, and references
+- Include PMIDs, DOIs, or URLs for all assertions
+- Follow naming conventions from parent terms
+- always commit in a branch, e.g. issue-NNN
+- if there is an existing PR which you started then checkout that branch and continue, rather than starting a new PR (unless you explicitly want to abandon the original PR, e.g. it was on completely the wrong tracks)
+- always make clear detailed commit messages, saying what you did and why
+- always sign your commits `@clnsmth-ontology-agent`
+- create PRs using `gh pr create ...`
+- File PRs with clear descriptions, and sign your PR
+
 
 ## 9. Handling GitHub Issues and Requests
 *To be filled in: Tool usage with 'gh' to interact with issues and pull requests.*
