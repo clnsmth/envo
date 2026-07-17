@@ -19,7 +19,20 @@ This guide provides instructions and conventions for AI agents (such as Google A
 
 
 ## 2. Querying the Ontology
-*To be filled in: Commands and patterns for searching ENVO's OWL functional syntax.*
+ We use the Ontology Access Kit (OAK) CLI (`runoak`) to query our local, dynamically generated SemSQL SQLite database instead of grepping raw files.           
+                                                                                                                                                                  
+- The compiled local SQLite database is located at: `src/envo/envo.db`                                                                                        
+  - *(Note: If this file is missing in your local workspace, generate it on-the-fly by running `cd src/envo && ./run.sh semsql make envo.db`)*                
+- To look up a specific term by ID:                                                                                                                           
+    - `runoak -i sqlite:src/envo/envo.db info ENVO:00000114`                                                                                                  
+- To search for terms matching a label or description (handles fuzzy matching & synonyms):                                                                    
+    - `runoak -i sqlite:src/envo/envo.db search 'marine environment'`                                                                                         
+- To find transitive parent/ancestor classes of a term:                                                                                                       
+    - `runoak -i sqlite:src/envo/envo.db ancestors ENVO:00000114`                                                                                             
+- Note that `runoak` is in your PATH, and `oaklib` is pre-installed in your environment.                                                                      
+- DO NOT attempt to run standard grep or raw text searches over files in `src/envo/`; they are structured in OWL XML, and text-based grep is slow and highly  
+inaccurate. Always use `runoak` against the SQLite DB.                                                                                                          
+- ONLY use the methods above for searching the ontology.  
 
 ## 3. Before Making Edits
 *To be filled in: Checklist and requirements before starting any ontology edits.*

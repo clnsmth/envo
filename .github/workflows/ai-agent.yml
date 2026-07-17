@@ -286,6 +286,12 @@ jobs:
         run: |
           git clone --depth 1 https://github.com/cmungall/obo-scripts.git "${{ env.TOOLS_DIR }}/obo-scripts"
           echo "${{ env.TOOLS_DIR }}/obo-scripts" >> "$GITHUB_PATH"
+          
+      - name: Compile ENVO SQLite Database
+        run: |                                                                                                                                                
+          cd src/envo                                                                                                                                         
+          chmod +x run.sh                                                                                                                                     
+          ./run.sh semsql make envo.db 
 
       - name: Install uv
         uses: astral-sh/setup-uv@v7
@@ -294,7 +300,7 @@ jobs:
         run: |
           uv venv
           . .venv/bin/activate
-          uv pip install aurelian jinja2-cli "wrapt>=1.17.2"
+          uv pip install aurelian jinja2-cli "wrapt>=1.17.2" oaklib
           echo "${{ github.workspace }}/.venv/bin" >> "$GITHUB_PATH"
 
       - name: Export GitHub token for gh CLI

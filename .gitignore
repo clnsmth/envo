@@ -33,3 +33,6 @@ src/envo/tmp
 venv/
 /tmp
 src/envo/reports/boolean-property-value-violation.csv
+
+# Ontology SQLite build files
+src/envo/*.db
