@@ -126,6 +126,29 @@ Execute these verification targets inside the `src/envo/` directory:
   make continuous_integration_test
   ```
 
+### 4. Standard ROBOT CSV Template Reference
+When creating or editing a ROBOT template (e.g. `src/envo/modules/temporary_robot_template.csv`), use the following structure. Row 1 contains the headers, and Row 2 contains the ROBOT template definitions:
+
+| Column Header (Row 1) | ROBOT Template Definition (Row 2) | Purpose & Expected Format |
+| :--- | :--- | :--- |
+| `Ontology ID` | `ID` | The 8-digit CURIE ID of the term (e.g., `ENVO:01001234`). |
+| `label` | `A rdfs:label` | The lowercase primary label (e.g., `seawater`). |
+| `parent class` | `SC %` | Label or ID of the parent class (e.g., `environmental material`). |
+| `definition` | `A IAO:0000115` | Textual genus-differentia definition (e.g., `A B which Cs`). |
+| `definition cross reference` | `AI oboInOwl:hasDbXref SPLIT=\|` | Pipe-separated reference URLs/ORCIDs for the definition (no spaces). |
+| `comment` | `A rdfs:comment` | Non-universal but useful supporting context. |
+| `comment cross reference` | `AI oboInOwl:hasDbXref SPLIT=\|` | Pipe-separated reference URLs/ORCIDs for the comment. |
+| `editors note` | `A IAO:0000116` | Developer notes, engineering decisions, or TODOs. |
+| `exact synonym` | `AL oboInOwl:hasExactSynonym@en SPLIT=\|` | Interchangeable term labels (e.g., `seawater\|sea water`). |
+| `broad synonym` | `AL oboInOwl:hasBroadSynonym@en SPLIT=\|` | Broader synonym terms (e.g., `acid rain`). |
+| `narrow synonym` | `AL oboInOwl:hasNarrowSynonym@en SPLIT=\|` | Narrower synonym terms (e.g., `highway`). |
+| `related synonym` | `AL oboInOwl:hasRelatedSynonym@en SPLIT=\|` | Linguistically loose or related synonyms (e.g., `sea floor`). |
+| `in subset` | `AL oboInOwl:inSubset SPLIT=\|` | Target ENVO subsets/slims (e.g., `envoPolar\|envoPlastics`). |
+| `cross reference` | `AI oboInOwl:hasDbXref SPLIT=\|` | Cross-references to SWEET or other vocabularies. |
+| `subclass axiom` | `SC %` | Computable logical relationships (e.g., `('part of' some 'coast')`). |
+| `creation date` | `A dc:date` | ISO 8601 creation timestamp (e.g., `2026-07-17T13:56:27Z`). |
+| `created by` | `A dc:creator SPLIT=\|` | Creator's full ORCID URL(s) (e.g., `https://orcid.org/0000-0002-4366-3088`). |
+
 
 ## 6. Ontology Format Guidelines
 To maintain quality and logical consistency across all curated concepts, ENVO enforces strict structural and stylistic rules for term creation.
@@ -148,6 +171,18 @@ To maintain quality and logical consistency across all curated concepts, ENVO en
   - **Modular Numbered Lists**: If there are multiple differentiating attributes, use a clean numbered list:
     - *Format*: `A B which 1) C1s, 2) C2s, and 3) C3s`
   - **Universality**: Keep differentiae minimal and universally true of all subclasses of the term.
+  - **Comments (`rdfs:comment`)**: If there are useful properties or attributes that are not universally true of all subclasses, **do not** put them in the definition. Instead, document them in the `rdfs:comment` field (`comment` column in templates) to keep definitions clean and minimal.
+
+- **Synonyms (SKOS-aligned)**:
+  ENVO uses four distinct synonym types to handle terminology variations. Synonym values are literal strings:
+  - `has_exact_synonym` (`exact synonym` column): Interchangeable class names (e.g., `seawater` and `sea water`).
+  - `has_broad_synonym` (`broad synonym` column): Broader than the primary label (e.g., `acid rain` for the process `acid rainfall`).
+  - `has_narrow_synonym` (`narrow synonym` column): More specific than the primary label (e.g., `highway` for `road`).
+  - `has_related_synonym` (`related synonym` column): Linguistically loose or related but not strictly equivalent (e.g., `sea floor` for `ocean floor`).
+
+- **Subsets & Slims**:
+  Subsets are slimmed-down selections of ENVO built for specific user communities or projects (e.g., `envoPolar`, `envoPlastics`).
+  - Annotate a term's subset membership using the `in subset` template column. Multiple subsets are separated by a pipe (`|`) without spaces.
 
 - **Definition Citations**:
   - Every definition must cite a reference (scholarly URL, PMID, DOI, or expert ORCID).
@@ -208,14 +243,22 @@ All term definitions and significant comments in ENVO must be substantiated with
 
 
 ## 11. Other Metadata & Annotations
-- Link back to the issue you are dealing with using the `term_tracker_item`
-- All terms should have definitions, with at least one definition xref, ideally a PMID, DOI, or URL
-- Sign terms with the nano-credited individual's ORCID using the `created_by` (or `dc:creator`) property
+- **Issue Tracking**: Link back to the GitHub issue using the `term_tracker_item` annotation property (with the full issue URL).
+- **Definitions**: Every new class must have exactly one definition, with at least one definition xref (source) pointing to a PMID, DOI, or scholarly URL.
+- **Creator Annotation (`dc:creator`)**: Value must be the full ORCID URL (e.g., `https://orcid.org/0000-0002-4366-3088`) of the curator/editor. In ROBOT templates, map this to the `created by` column.
+- **Contributor Annotation (`dc:contributor`)**: Credit additional individuals or organizations using ORCID URLs.
+- **Creation Date (`dc:date`)**: Track term creation timestamps using the ISO 8601 format (e.g., `2026-07-17T13:56:27Z`). In ROBOT templates, map this to the `creation date` column.
 
 
 ## 12. Relationships & Axioms
-- All terms should have at least one parent (direct superclass), which is specified in the `parent class` column of ROBOT templates (or as an asserted subclass).
-- Many terms in this ontology have relationships such as `part of` (`BFO_0000050`) or `'composed primarily of'` (`RO_0002473`).
+- **Parent Class**: Every term must have at least one parent (direct superclass), specified in the `parent class` column of ROBOT templates (or as an asserted subclass).
+- **Core Relationships**:
+  - `composed primarily of` (`RO_0002473`): Used to describe the main constituent of an environmental material. Map to other materials or ChEBI chemical entities (e.g., `pedosphere` composed primarily of some `soil`, or liquid water composed primarily of some `water` `CHEBI:15377`).
+  - `part of` (`BFO_0000050`): Used when a term is a physical/structural part of another (e.g., a `shore` is part of a `coast`).
+  - `has part` (`BFO_0000051`): The inverse of `part of`.
+  - `occurs in` (`BFO_0000066`): Used to link a process to the environmental system or material where it takes place (e.g., a process occurs in some ecosystem).
+  - `formed as result of` (`RO_0002354`): Links a material entity to the process that created it.
+  - Other common properties: `adjacent to` (`RO_0002151`), `has quality` (`RO_0000086`), `overlaps` (`RO_0002131`), `input of` (`RO_0002233`), `output of` (`RO_0002234`), `located in` (`RO_0001025`), `location of` (`RO_0001015`), `determined by` (`RO_0002507`).
 
 
 ## 13. Logical Definitions
