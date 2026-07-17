@@ -128,7 +128,32 @@ Execute these verification targets inside the `src/envo/` directory:
 
 
 ## 6. Ontology Format Guidelines
-*To be filled in: Standard naming conventions, ID structure (8 digits), and required term fields.*
+To maintain quality and logical consistency across all curated concepts, ENVO enforces strict structural and stylistic rules for term creation.
+
+- **Term ID Format (8-Digit Curie vs. OWL Underscore)**:
+  - ENVO IDs use **exactly 8 digits** (unlike 7-digit IDs common in other OBO ontologies).
+  - **In ROBOT CSV Templates & OAK Queries**: Use the **colon format** (e.g., `ENVO:01001234` or `ENVO:03000102`). This is required in ROBOT template ID/parent columns and for running `runoak` commands.
+  - **In Raw OWL Files (`envo-edit.owl` / `envo-idranges.owl`)**: The colon is replaced by an **underscore** (e.g., `ENVO_01001234`), as part of full PURL IRIs: `http://purl.obolibrary.org/obo/ENVO_01001234`.
+  - **New Term Requests (NTRs)**: Assign IDs strictly within your assigned range in `src/envo/envo-idranges.owl` to avoid ID collisions. Never guess IDs; use `runoak` to verify.
+
+- **Class Labels**:
+  - Class labels are lowercase (e.g., `marsh`, `water ice`, `seawater`).
+  - Proper nouns and standard groupings can be capitalized (e.g., `Taylor column`, `WMO blizzard`).
+
+- **Textual Definitions (Genus/Differentia Form)**:
+  - All definitions must follow OBO Foundry principles:
+    - `A B which Cs` (e.g., `"A chair which is red"`)
+    - `A B during which C` (e.g., `"A mass wasting process during which slab snow rapidly moves..."`)
+  - **Exact Parent Match**: `B` must match the exact label of the direct parent class. Do not modify `B` with adjectives in the genus part (e.g. use `"A B which is green..."` instead of `"A green B..."`).
+  - **Modular Numbered Lists**: If there are multiple differentiating attributes, use a clean numbered list:
+    - *Format*: `A B which 1) C1s, 2) C2s, and 3) C3s`
+  - **Universality**: Keep differentiae minimal and universally true of all subclasses of the term.
+
+- **Definition Citations**:
+  - Every definition must cite a reference (scholarly URL, PMID, DOI, or expert ORCID).
+  - **Verbatim definition**: Map to the `definition source` (`IAO_0000119`) property.
+  - **Paraphrased/Adapted definition**: Map to the `database_cross_reference` (`oboInOwl:hasDbXref`) property.
+
 
 ## 7. Publications & Citations
 *To be filled in: Citation rules, references, and fetching publication details.*
