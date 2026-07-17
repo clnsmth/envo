@@ -219,5 +219,15 @@ All term definitions and significant comments in ENVO must be substantiated with
 
 
 ## 13. Logical Definitions
-*To be filled in: Genus-differentia structures and axiomatization styles.*
+- Logical definitions must follow the genus-differentia form, and the text definition should closely mirror the logical assertions (subclass axioms/restrictions).
+- **Subclass Axioms in ROBOT Templates**:
+  - Specify subclass restrictions in the `subclass axiom` column of the CSV.
+  - Always wrap expressions containing multiple terms in parentheses: `('property' some 'value')`.
+  - Use the pipe (`|`) delimiter without spaces to list multiple axioms in a single template cell.
+- **Example**:
+  - **Label**: `grain of snow`
+  - **Parent Class**: `ice mass`
+  - **Textual Definition**: `"An ice mass which is 1) on the order of 1 millimeter or less, 2) has a white and opaque appearance, and 3) is formed as a result of water droplets freezing during precipitation."`
+  - **Subclass Axioms cell**: `('has quality' some (opaque and white))|('formed as result of' some 'freezing of water into water ice')|('participates in' some 'precipitation process')`
+
 
