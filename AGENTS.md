@@ -214,7 +214,9 @@ All term definitions and significant comments in ENVO must be substantiated with
 
 
 ## 12. Relationships & Axioms
-*To be filled in: Usage of relations (e.g., composed primarily of) and restrictions.*
+- All terms should have at least one parent (direct superclass), which is specified in the `parent class` column of ROBOT templates (or as an asserted subclass).
+- Many terms in this ontology have relationships such as `part of` (`BFO_0000050`) or `'composed primarily of'` (`RO_0002473`).
+
 
 ## 13. Logical Definitions
 *To be filled in: Genus-differentia structures and axiomatization styles.*
