@@ -288,10 +288,16 @@ jobs:
           echo "${{ env.TOOLS_DIR }}/obo-scripts" >> "$GITHUB_PATH"
           
       - name: Compile ENVO SQLite Database
-        run: |                                                                                                                                                
-          cd src/envo                                                                                                                                         
-          chmod +x run.sh                                                                                                                                     
-          ./run.sh semsql make envo.db 
+        run: |
+          cd src/envo
+          if command -v semsql >/dev/null 2>&1; then
+            echo "Running inside ODK container; executing semsql directly."
+            semsql make envo.db
+          else
+            echo "Running on host; executing semsql via run.sh (Docker)."
+            chmod +x run.sh
+            ./run.sh semsql make envo.db
+          fi
 
       - name: Install uv
         uses: astral-sh/setup-uv@v7
