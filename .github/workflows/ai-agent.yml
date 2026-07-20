@@ -329,6 +329,7 @@ jobs:
       - name: Run Antigravity CLI
         id: antigravity
         env:
+          GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           ANTIGRAVITY_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           ANTIGRAVITY_TOKEN: ${{ secrets.GEMINI_API_KEY }}
