@@ -312,6 +312,15 @@ jobs:
       - name: Export GitHub token for gh CLI
         run: echo "GH_TOKEN=${{ steps.generate-token.outputs.token }}" >> "$GITHUB_ENV"
 
+      - name: Verify Secret Presence
+        run: |
+          if [ -z "${{ secrets.GEMINI_API_KEY }}" ]; then
+            echo "❌ ERROR: secrets.GEMINI_API_KEY is empty in this run!"
+            exit 1
+          else
+            echo "✅ SUCCESS: secrets.GEMINI_API_KEY is populated."
+          fi
+
       - name: Install Antigravity CLI (agy)
         run: |
           curl -fsSL https://antigravity.google/cli/install.sh | bash
