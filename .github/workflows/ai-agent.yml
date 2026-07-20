@@ -377,5 +377,5 @@ jobs:
             - Run: [View workflow run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
             ```
         run: |
-          agy --model "${{ env.MODEL }}" --headless --approve all -p "$PROMPT_CONTENT"
+          agy --model "${{ env.MODEL }}" --dangerously-skip-permissions -p "$PROMPT_CONTENT"
             
