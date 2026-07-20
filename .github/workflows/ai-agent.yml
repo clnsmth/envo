@@ -332,7 +332,8 @@ jobs:
           GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           ANTIGRAVITY_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          ANTIGRAVITY_TOKEN: ${{ secrets.GEMINI_API_KEY }}
+          ANTIGRAVITY_TOKEN: ${{ secrets.ANTIGRAVITY_TOKEN }}
+
           PROMPT_CONTENT: |
             You are @${{ env.AGENT_NAME }}, responding to a request from @${{ fromJSON(needs.check-mention.outputs.result).user }} on GitHub ${{ fromJSON(needs.check-mention.outputs.result).itemType }} #${{ fromJSON(needs.check-mention.outputs.result).itemNumber }}.
 
