@@ -312,29 +312,14 @@ jobs:
       - name: Export GitHub token for gh CLI
         run: echo "GH_TOKEN=${{ steps.generate-token.outputs.token }}" >> "$GITHUB_ENV"
 
-      - name: Verify Secret Presence
-        run: |
-          if [ -z "${{ secrets.GEMINI_API_KEY }}" ]; then
-            echo "❌ ERROR: secrets.GEMINI_API_KEY is empty in this run!"
-            exit 1
-          else
-            echo "✅ SUCCESS: secrets.GEMINI_API_KEY is populated."
-          fi
-
-      - name: Install Antigravity CLI (agy)
-        run: |
-          curl -fsSL https://antigravity.google/cli/install.sh | bash
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
-
-      - name: Run Antigravity CLI
-        id: antigravity
+      - name: Run Gemini CLI
+        id: gemini
+        uses: google-github-actions/run-gemini-cli@v0.1.22
         env:
-          GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          ANTIGRAVITY_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          ANTIGRAVITY_TOKEN: ${{ secrets.ANTIGRAVITY_TOKEN }}
-
-          PROMPT_CONTENT: |
+          GEMINI_CLI_TRUST_WORKSPACE: "true"
+        with:
+          gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
+          prompt: |
             You are @${{ env.AGENT_NAME }}, responding to a request from @${{ fromJSON(needs.check-mention.outputs.result).user }} on GitHub ${{ fromJSON(needs.check-mention.outputs.result).itemType }} #${{ fromJSON(needs.check-mention.outputs.result).itemNumber }}.
 
             Follow the repository instructions in `AGENTS.md`.
@@ -377,6 +362,4 @@ jobs:
             - Triggered by: @${{ fromJSON(needs.check-mention.outputs.result).user }}
             - Run: [View workflow run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
             ```
-        run: |
-          agy --model "${{ env.MODEL }}" --dangerously-skip-permissions -p "$PROMPT_CONTENT"
             
