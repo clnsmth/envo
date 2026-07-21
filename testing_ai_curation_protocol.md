@@ -66,10 +66,10 @@ The following secrets must be present in the GitHub repository's Settings under 
 ### Steps:
 1. Log in to GitHub as `clnsmth`.
 2. Open a new **Issue**.
-3. Title: `Curation Request: Add Seawater`
+3. Title: `Curation Request: Add Sea water`
 4. Body:
    ```text
-   @clnsmth-ontology-agent please add the term 'seawater' as a subclass of 'environmental material' with definition 'A liquid environmental material consisting of water and dissolved salts'.
+   @clnsmth-ontology-agent please add the term 'sea water' as a subclass of 'environmental material' with definition 'A liquid environmental material consisting of water and dissolved salts'.
    ```
 5. Submit the issue.
 
@@ -109,8 +109,8 @@ The following secrets must be present in the GitHub repository's Settings under 
    @clnsmth-ontology-agent please add a new term 'abyssal bioluminescent zone' as a subclass of 'marine biome'.
 
    Definition: A marine biome which is 1) located in the abyssal zone and 2) characterized by the presence of bioluminescent organisms.
-   Created By: https://orcid.org/0000-0002-4366-3088
-   Reference: https://orcid.org/0000-0002-4366-3088
+   Created By: https://orcid.org/0000-0003-2261-9931
+   Reference: https://en.wikipedia.org/wiki/Abyssal_zone
    ```
 5. Submit the issue. Let's assume the issue number assigned by GitHub is `#100`.
 
