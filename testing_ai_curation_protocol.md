@@ -104,14 +104,14 @@ The following secrets must be present in the GitHub repository's Settings under 
 1. Log in to GitHub as `clnsmth`.
 2. Open a new **Issue**.
 3. Title: `Curation Request: Abyssal Bioluminescent Zone`
-4. Body:
-   ```text
-   @clnsmth-ontology-agent please add a new term 'abyssal bioluminescent zone' as a subclass of 'marine biome'.
+   4. Body:
+      ```text
+      @clnsmth-ontology-agent please add a new term 'abyssal bioluminescent zone' as a subclass of 'marine biome'.
 
-   Definition: A marine biome which is 1) located in the abyssal zone and 2) characterized by the presence of bioluminescent organisms.
-   Created By: https://orcid.org/0000-0003-2261-9931
-   Reference: https://en.wikipedia.org/wiki/Abyssal_zone
-   ```
+      Definition: A marine biome which is 1) located in the abyssal zone and 2) characterized by the presence of bioluminescent organisms.
+      Created By: https://orcid.org/0000-0003-2261-9931
+      Reference: https://en.wikipedia.org/wiki/Abyssal_zone
+      ```
 5. Submit the issue. Let's assume the issue number assigned by GitHub is `#100`.
 
 ### Curation Agent Execution Flow (Behind the Scenes):
