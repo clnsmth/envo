@@ -50,7 +50,7 @@ Carefully parse and extract fields from the issue body:
 If any required information is missing, the agent MUST do its best to fill in the blanks proactively:
 1. **Missing Name**: Halt and request clarification.
 2. **Missing Description**: Attempt to query Wikipedia or search the web using the term name to draft a plausible definition.
-3. **Missing Reference**: Search PubMed, DOIs, or the web for scientific/standard definitions or articles related to the term and supply a valid reference URL.
+3. **Missing Reference**: Reuse the Wikipedia or web search URL found while drafting the description in step 2. If no description search was run, use a general Wikipedia search URL or standard search query URL for the term to minimize compute overhead.
 4. **Missing ORCID**: Look up the GitHub user's public profile or use a placeholder, clearly flagging that the ORCID must be updated by the curator.
 5. **Always flag any filled-in blanks** at the end of the post so curators are aware of what was inferred.
 
