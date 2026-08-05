@@ -50,9 +50,16 @@ Carefully parse and extract fields from the issue body:
 If any required information is missing, the agent MUST do its best to fill in the blanks proactively:
 1. **Missing Name**: Halt and request clarification.
 2. **Missing Description**: Attempt to query Wikipedia or search the web using the term name to draft a plausible definition.
-3. **Missing Reference**: Reuse the Wikipedia or web search URL found while drafting the description in step 2. If no description search was run, use a general Wikipedia search URL or standard search query URL for the term to minimize compute overhead.
+3. **Missing Reference**: Do NOT perform complex academic/literature database searches (like PubMed or DOI) to retrieve peer-reviewed articles. Peer-reviewed literature is NOT a requirement. Simply output a direct URL to the specific Wikipedia page (e.g., `https://en.wikipedia.org/wiki/Term_Name`) or specific glossary/scientific article page where the definition actually exists.
+   - **NO SEARCH ENGINES**: General search engine query links (such as Google search results) are NOT valid citations. The URL must link directly to the page containing the content.
+   - **URL VERIFICATION CHECK**: You MUST verify that any reference URL or DOI you fetch or use actually resolves and is an active, live webpage (i.e. does not return a 404, bad gateway, or unresolvable domain). If a URL is broken or unresolvable, you must search for and select an alternative valid, active URL.
 4. **Missing ORCID**: Look up the GitHub user's public profile or use a placeholder, clearly flagging that the ORCID must be updated by the curator.
 5. **Always flag any filled-in blanks** at the end of the post so curators are aware of what was inferred.
+
+> [!IMPORTANT]
+> **Strict Formatting Overrides**:
+> - **NEVER output the local GitHub issue thread URL** in the 'Term Tracker Item' field. You must ALWAYS output exactly the literal string: `[To be filled in with the ENVO issue URL]` on this line.
+> - **NEVER perform scholarly PMID/DOI database searches** for missing references, and NEVER use search engine results pages as citations. Only output verified, active links to specific pages.
 
 ### Step 2: Check for Existing Terms (Duplicate Check)
 Leverage existing local OAK search strategies:

@@ -179,5 +179,8 @@ When a curator requests mapping an issue containing an "EDI Annotation Studio Ne
 - If the term already exists, report back immediately and halt.
 - If the term does not exist:
   - Extract the EDI fields and proactively identify/fill any missing required information (such as missing descriptions or references) by web search or inference.
+    - **CRITICAL**: Do NOT perform complex academic/literature database searches (such as PubMed/DOI lookups) to fetch a peer-reviewed publication. Instead, use a direct URL to a specific Wikipedia page or glossary page representing the source of the definition. General search engine query URLs (such as Google search results) are NOT valid.
+    - **VERIFICATION**: Verify that all fetched/used reference URLs or DOIs actually resolve to active, live webpages before outputting them. Do not include broken or dead links.
   - Formulate OBO-compliant genus-differentia definitions starting with a lowercase parent term.
   - Output the mapped request exactly as a copy-pasteable ENVO New Term Request markdown block for the upstream tracker, rather than a table.
+    - **CRITICAL**: NEVER output the local repository issue thread URL in the 'Term Tracker Item' field. You must ALWAYS output exactly the literal boilerplate string: `[To be filled in with the ENVO issue URL]`.
