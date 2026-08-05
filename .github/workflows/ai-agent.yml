@@ -340,7 +340,10 @@ jobs:
 
             MAKING CHANGES:
             If you need to modify files:
-            1. Create a branch: `git checkout -b ${{ fromJSON(needs.check-mention.outputs.result).branchName }}`
+            1. Create a branch based directly on the clean, latest upstream master:
+               `git remote add upstream https://github.com/EnvironmentOntology/envo.git || true`
+               `git fetch upstream master`
+               `git checkout -b ${{ fromJSON(needs.check-mention.outputs.result).branchName }} upstream/master`
                (unless requested to update an existing branch or PR, in which case check out and work on that branch)
             2. Make your changes and commit with descriptive messages
             3. Push the branch: `git push -u origin ${{ fromJSON(needs.check-mention.outputs.result).branchName }}`
