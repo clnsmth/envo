@@ -95,6 +95,7 @@ Formulate a first-pass definition in the standard ENVO genus-differentia format:
   1. Ensure the parent class is an actual, lowercase ENVO class label.
   2. Correct minor spelling/grammatical issues in the description (e.g. mapping "mater" to "matter").
   3. Ensure it starts with the standard indefinite article (`A` or `An`).
+  4. **Strict Source Coupling**: The textual definition and the cited reference URL MUST be tightly coupled. The generated textual definition MUST be derived directly and exclusively from the content of the single specific webpage whose URL is used in the 'Definition Source / Reference' field. Never mix information from multiple sources, and never cite a different webpage than the one from which the definition was formulated.
 
 ### Step 5: Post copy-pasteable ENVO New Term Request
 Post a beautifully formatted markdown comment containing the final ENVO issue template format. This must be formatted exactly as a standard upstream ENVO new term request, so curators can copy and paste it directly:
