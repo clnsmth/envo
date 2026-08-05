@@ -109,7 +109,7 @@ You can copy and paste the markdown block below directly into a new issue on the
 - **Exact Synonym(s)**: [Optional - list exact synonyms if any]
 - **Created By**: <CREATOR_ORCID>
 - **Creation Date**: <CURRENT_ISO_8601_TIMESTAMP>
-- **Term Tracker Item**: <ISSUE_URL>
+- **Term Tracker Item**: [To be filled in with the ENVO issue URL]
 ```
 
 ---
