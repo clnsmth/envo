@@ -170,3 +170,14 @@ All term definitions and significant comments in ENVO must be substantiated with
 - Logical definitions must follow the genus-differentia form, and the text definition should closely mirror the logical assertions like subclass axioms and restrictions.
 - Subclass Axioms in ROBOT Templates. Specify subclass restrictions in the `subclass axiom` column of the CSV. Always wrap expressions containing multiple terms in parentheses, in the format `('property' some 'value')`. Use the pipe delimiter without spaces to list multiple axioms in a single template cell.
 - Example. Under this schema, the label is `grain of snow`, the parent class is `ice mass`, and the textual definition is "An ice mass which is 1) on the order of 1 millimeter or less, 2) has a white and opaque appearance, and 3) is formed as a result of water droplets freezing during precipitation." The subclass axioms cell contains: `('has quality' some (opaque and white))|('formed as result of' some 'freezing of water into water ice')|('participates in' some 'precipitation process')`
+
+
+## 14. Workflow: EDI to ENVO Term Request Mapping
+When a curator requests mapping an issue containing an "EDI Annotation Studio New Term Request" (indicated by the presence of headings like `### Suggested Term Name`, `### Description`, and `### ORCID URL`), follow the mapping, duplicate checks, and missing-field inference guidelines defined in `.agents/skills/edi-to-envo-mapping.md`.
+- Trigger the mapping workflow dynamically for any mention with intent matching variations of "map this" or "convert to ENVO request".
+- Always use existing OAK search strategies (`runoak search`) as documented in `## 2. Querying the Ontology` and `.agents/agents/ontology-term-lookup.md` to verify if the suggested term or synonyms already exist locally.
+- If the term already exists, report back immediately and halt.
+- If the term does not exist:
+  - Extract the EDI fields and proactively identify/fill any missing required information (such as missing descriptions or references) by web search or inference.
+  - Formulate OBO-compliant genus-differentia definitions starting with a lowercase parent term.
+  - Output the mapped request exactly as a copy-pasteable ENVO New Term Request markdown block for the upstream tracker, rather than a table.
