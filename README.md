@@ -60,6 +60,7 @@ The repository was moved to this location from https://code.google.com/p/envo/ i
 The ENVO repository features an integrated AI-Assisted Curation Agent: **`@clnsmth-ontology-agent`**. This agent is built to assist human curators with repetitive workflow tasks, validation, and schema transformations.
 
 ### Key Capabilities
+* **On-Demand AI Code Review**: Reviews pull requests for structural, logical, and style consistency, including checking hierarchy, definitions, and obsolescence handling on-demand.
 * **EDI Term Request Mapping**: Converts incoming EDI Annotation Studio term requests into copy-pasteable ENVO-ready new term issues.
 * **Intelligent Missing-Field Recovery**: Proactively drafts OBO-compliant genus-differentia definitions and couples them to active, validated Wikipedia/glossary webpage references.
 * **Local Term Duplication Checks**: Queries the compiled SemSQL database using OAK CLI (`runoak`) to prevent term collisions.
@@ -67,6 +68,10 @@ The ENVO repository features an integrated AI-Assisted Curation Agent: **`@clnsm
 
 ### How to Interact
 Authorized curators can trigger the agent on any GitHub issue or PR by commenting:
+* To map an EDI request:
 > `@clnsmth-ontology-agent please map this to an ENVO new term request`
+
+* To request an AI review on a pull request:
+> `@clnsmth-ontology-agent please review`
 
 For technical guidelines, see [`AGENTS.md`](file:///Users/csmith/Code/clnsmth/envo/AGENTS.md). For testing, see [`testing_ai_curation_protocol.md`](file:///Users/csmith/Code/clnsmth/envo/testing_ai_curation_protocol.md).
