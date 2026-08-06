@@ -13900,7 +13900,7 @@ SubClassOf(<http://purl.obolibrary.org/obo/ENVO_00002148> <http://purl.obolibrar
 
 # Class: <http://purl.obolibrary.org/obo/ENVO_00002149> (sea water)
 
-AnnotationAssertion(<http://purl.obolibrary.org/obo/IAO_0000115> <http://purl.obolibrary.org/obo/ENVO_00002149> "Water which has physicochemical properties that have been determined by the processes occuring in a sea or ocean.")
+AnnotationAssertion(<http://purl.obolibrary.org/obo/IAO_0000115> <http://purl.obolibrary.org/obo/ENVO_00002149> "A liquid environmental material consisting of water and dissolved salts")
 AnnotationAssertion(<http://purl.obolibrary.org/obo/IAO_0000116> <http://purl.obolibrary.org/obo/ENVO_00002149> "When we have more classes representing the various processes which make seawater seawater, we can further axiomatise this class.")
 AnnotationAssertion(<http://www.geneontology.org/formats/oboInOwl#hasDbXref> <http://purl.obolibrary.org/obo/ENVO_00002149> "EcoLexicon:sea_water")
 AnnotationAssertion(<http://www.geneontology.org/formats/oboInOwl#hasDbXref> <http://purl.obolibrary.org/obo/ENVO_00002149> "LTER:701")
@@ -13911,6 +13911,7 @@ AnnotationAssertion(<http://www.geneontology.org/formats/oboInOwl#hasExactSynony
 AnnotationAssertion(rdfs:comment <http://purl.obolibrary.org/obo/ENVO_00002149> "This definition refers to water that is actually in a sea or ocean. This water may have a wide range of salinity levels.")
 AnnotationAssertion(rdfs:label <http://purl.obolibrary.org/obo/ENVO_00002149> "sea water")
 EquivalentClasses(<http://purl.obolibrary.org/obo/ENVO_00002149> ObjectIntersectionOf(<http://purl.obolibrary.org/obo/ENVO_00002010> ObjectSomeValuesFrom(<http://purl.obolibrary.org/obo/BFO_0000050> ObjectUnionOf(<http://purl.obolibrary.org/obo/ENVO_00000015> <http://purl.obolibrary.org/obo/ENVO_00000016>))))
+SubClassOf(<http://purl.obolibrary.org/obo/ENVO_00002149> <http://purl.obolibrary.org/obo/ENVO_00010483>)
 SubClassOf(<http://purl.obolibrary.org/obo/ENVO_00002149> <http://purl.obolibrary.org/obo/ENVO_00002010>)
 
 # Class: <http://purl.obolibrary.org/obo/ENVO_00002150> (coastal sea water)
