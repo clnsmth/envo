@@ -7,7 +7,6 @@ This guide provides instructions and conventions for AI agents to edit, query, a
 - Assigned ID ranges are stored in `src/envo/envo-idranges.owl`. This file stores the designated numeric ID ranges assigned to active curators and editors to prevent ID collisions. AI agents must strictly use IDs allocated within their permitted range.
 - ROBOT and pattern modules are located in `src/envo/modules/`. This directory contains CSV templates and modules used by the ROBOT tool for automated term generation and bulk imports.
 - The local XML catalog is defined in `src/envo/catalog-v001.xml`. This file defines local URIs and mappings for resolving imported ontologies without requiring active internet connectivity.
-- Curation and process documentation is in `wiki/`. This directory houses comprehensive, up-to-date guides on annotations, relations, term creation, and ROBOT workflows.
 
 
 ## 2. Querying the Ontology
