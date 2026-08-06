@@ -40,14 +40,15 @@ In ENVO, editing is strictly performed using the ROBOT template pipeline for CSV
 
 ### 1. Git Curation Workflow (ROBOT-based)
 Always isolate your changes in a dedicated git branch matching the issue number.
-- Synchronize upstream. Add the upstream remote and fetch the latest official master:
+- Synchronize upstream. Fetch and sync your local master branch with the official upstream master:
   ```bash
-  git remote add upstream https://github.com/EnvironmentOntology/envo.git || true
-  git fetch upstream master
+  git checkout master
+  git pull https://github.com/EnvironmentOntology/envo.git master
+  git push origin master
   ```
-- Checkout a branch. Always create topic branches from the clean upstream master head to keep agent files separate. Run:
+- Checkout a branch. Always create topic branches from your clean master branch to keep agent files separate. Run:
   ```bash
-  git checkout -b issue-xyz upstream/master
+  git checkout -b issue-xyz master
   ```
 - Prepare the CSV Template.
   - Create or edit a CSV template file in `src/envo/modules/`, such as `temporary_robot_template.csv`.
@@ -131,11 +132,12 @@ All term definitions and significant comments in ENVO must be substantiated with
 - For new terms, provide a name, definition, place in the hierarchy, and references.
 - Include PMIDs, DOIs, or URLs for all assertions.
 - Follow naming conventions from parent terms.
-- Always commit in a branch, such as issue-NNN. To prevent agent harness or configuration files from leaking into the upstream official ENVO repository, always base your branch directly on the clean, live upstream master head. Run:
+- Always commit in a branch, such as issue-NNN. To prevent agent harness or configuration files from leaking into the upstream official ENVO repository, always base your branch directly on your clean master branch. Run:
   ```bash
-  git remote add upstream https://github.com/EnvironmentOntology/envo.git || true
-  git fetch upstream master
-  git checkout -b issue-xyz upstream/master
+  git checkout master
+  git pull https://github.com/EnvironmentOntology/envo.git master
+  git push origin master
+  git checkout -b issue-xyz master
   ```
 - If there is an existing PR which you started, checkout that branch and continue, rather than starting a new PR, unless you explicitly want to abandon the original PR because it was on completely the wrong tracks.
 - Always make clear detailed commit messages, saying what you did and why.

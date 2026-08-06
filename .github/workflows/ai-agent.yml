@@ -276,6 +276,14 @@ jobs:
           git config --global user.name "${{ env.AGENT_NAME }}[bot]"
           git config --global user.email "${{ env.AGENT_NAME }}[bot]@users.noreply.github.com"
 
+      - name: Sync Fork Master with Upstream
+        run: |
+          git remote add upstream https://github.com/EnvironmentOntology/envo.git || true
+          git fetch upstream master
+          git checkout -B master upstream/master
+          git push origin master --force
+          git checkout -
+
       - name: Create tools directory
         run: mkdir -p "${{ env.TOOLS_DIR }}"
 
@@ -340,14 +348,14 @@ jobs:
 
             MAKING CHANGES:
             If you need to modify files:
-            1. Create a branch based directly on the clean, latest upstream master:
-               `git remote add upstream https://github.com/EnvironmentOntology/envo.git || true`
-               `git fetch upstream master`
-               `git checkout -b ${{ fromJSON(needs.check-mention.outputs.result).branchName }} upstream/master`
+            1. Create a branch based on the clean, fully-synchronized master branch:
+               `git fetch origin master`
+               `git checkout -b ${{ fromJSON(needs.check-mention.outputs.result).branchName }} origin/master`
                (unless requested to update an existing branch or PR, in which case check out and work on that branch)
             2. Make your changes and commit with descriptive messages
             3. Push the branch: `git push -u origin ${{ fromJSON(needs.check-mention.outputs.result).branchName }}`
-            4. Create a PR targeting the current fork using `gh pr create --repo ${{ github.repository }}` with a clear title and description
+            4. Create a PR targeting the current fork's master branch:
+               `gh pr create --repo ${{ github.repository }} --base master` with a clear title and description
 
             COMMUNICATING:
             - Use `gh` CLI directly to interact with the user on GitHub
