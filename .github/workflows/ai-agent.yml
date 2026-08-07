@@ -350,6 +350,7 @@ jobs:
 
             MAKING CHANGES:
             If you need to modify files:
+            - **Ephemeral Runner Safety**: You run in a single-turn, ephemeral runner. Any changes left on local disk will be destroyed. You MUST commit, push, and create a Pull Request for ANY modifications you make before ending your run.
             1. Create a branch based on the clean, fully-synchronized master branch:
                `git fetch origin master`
                `git checkout -b ${{ fromJSON(needs.check-mention.outputs.result).branchName }} origin/master`

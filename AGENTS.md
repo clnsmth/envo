@@ -5,6 +5,7 @@ This guide provides instructions and conventions for AI agents to edit, query, a
 ## 1. Project Layout
 - The primary development file is `src/envo/envo-edit.owl`. All manual or automated ontology edits must be made directly in this file or via ROBOT templates in the modules directory. Never edit release or compiled files directly, such as `envo.owl`, `envo.obo`, or `envo.json` in either the repository root or the `src/envo/` directory. These are derived files generated during the release build.
 - Assigned ID ranges are stored in `src/envo/envo-idranges.owl`. This file stores the designated numeric ID ranges assigned to active curators and editors to prevent ID collisions. AI agents must strictly use IDs allocated within their permitted range.
+  - **AI Agent Permitted ID Range**: `ENVO:03622000` to `ENVO:03622999` (ID range 31 allocated to `clnsmth-ontology-agent`).
 - ROBOT and pattern modules are located in `src/envo/modules/`. This directory contains CSV templates and modules used by the ROBOT tool for automated term generation and bulk imports.
 - The local XML catalog is defined in `src/envo/catalog-v001.xml`. This file defines local URIs and mappings for resolving imported ontologies without requiring active internet connectivity.
 
@@ -128,6 +129,7 @@ All term definitions and significant comments in ENVO must be substantiated with
 
 ## 8. GitHub Contribution Process
 - Most requests from users follow one of two patterns. Either you are not confident how to proceed, in which case you should end by asking a clarifying question via `gh`, or you are confident how to proceed, in which case you should make changes, commit on a branch, and open a PR for the user to review.
+- **Strict Git & PR Rule (Ephemeral Runner)**: Since you run in a single-turn, ephemeral GitHub Actions runner, any local file modifications left on disk will be lost forever when the run ends. If you make ANY modifications to repository files (even minor or intermediate ones), you MUST commit, push your branch, and open a Pull Request (or Draft PR) targeting the master branch before terminating your execution. Always reference the PR in your GitHub issue comments.
 - Check existing terms before adding new ones.
 - For new terms, provide a name, definition, place in the hierarchy, and references.
 - Include PMIDs, DOIs, or URLs for all assertions.
