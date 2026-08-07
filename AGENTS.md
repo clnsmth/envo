@@ -142,7 +142,7 @@ All term definitions and significant comments in ENVO must be substantiated with
 - If there is an existing PR which you started, checkout that branch and continue, rather than starting a new PR, unless you explicitly want to abandon the original PR because it was on completely the wrong tracks.
 - Always make clear detailed commit messages, saying what you did and why.
 - Always sign your commits as `@clnsmth-ontology-agent`.
-- Create PRs using `gh pr create`.
+- Create PRs using `gh pr create`. When creating a Pull Request, you **MUST** target the fork repository `clnsmth/envo` (e.g., `gh pr create --repo clnsmth/envo`) and **NEVER** target the official upstream `EnvironmentOntology/envo` repository, to avoid notifying upstream maintainers.
 - File PRs with clear descriptions, and sign your PR.
 
 
