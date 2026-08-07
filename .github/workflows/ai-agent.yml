@@ -321,6 +321,8 @@ jobs:
         run: |
           echo "GH_TOKEN=${{ steps.generate-token.outputs.token }}" >> "$GITHUB_ENV"
           echo "GH_REPO=${{ github.repository }}" >> "$GITHUB_ENV"
+          gh repo set-default ${{ github.repository }}
+
 
       - name: Run Gemini CLI
         id: gemini

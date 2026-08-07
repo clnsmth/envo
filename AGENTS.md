@@ -150,7 +150,7 @@ All term definitions and significant comments in ENVO must be substantiated with
 
 ## 9. Handling GitHub Issues and Requests
 - Use the `gh` tool to read and write issues and PRs.
-  - **Repository Targeting**: When running in GitHub Actions, the `GH_REPO` environment variable is automatically configured to target the active fork repository. Ensure all your manual or automated issue and PR operations align with this dynamically configured `$GH_REPO` environment variable to ensure maximum portability.
+  - **Repository Targeting**: When running in GitHub Actions, the local repository's default configuration is automatically set using `gh repo set-default` to target the active fork repository. Ensure all your manual or automated issue and PR operations align with this dynamically configured target for maximum portability.
 - Sign all commits and PRs as `@clnsmth-ontology-agent`.
 
 
