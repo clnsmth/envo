@@ -255,3 +255,8 @@ jobs:
             - Triggered by: @${{ fromJSON(needs.check-mention.outputs.result).user }}
             - Run: [View workflow run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
             ```
+
+      - name: Restore actions directory for cleanup
+        if: always()
+        run: |
+          git checkout ${{ github.sha }} -- .github/actions/ || true
