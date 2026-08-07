@@ -266,7 +266,7 @@ jobs:
         run: gh repo sync ${{ github.repository }} -b master
 
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: master
           fetch-depth: 0
