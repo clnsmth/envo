@@ -260,19 +260,17 @@ jobs:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
-      - name: Checkout repository
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 1
-          token: ${{ steps.generate-token.outputs.token }}
-
       - name: Sync Fork Master with Upstream
-        run: |
-          git remote add upstream https://github.com/EnvironmentOntology/envo.git || true
-          git fetch upstream master
-          git checkout -B master upstream/master
-          git push origin master --force
-          git checkout -
+        env:
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+        run: gh repo sync ${{ github.repository }} -b master
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+          token: ${{ steps.generate-token.outputs.token }}
 
       - name: Set up Agent Environment
         uses: ./.github/actions/setup-agent-env
@@ -310,10 +308,7 @@ jobs:
             MAKING CHANGES:
             If you need to modify files:
             - **Ephemeral Runner Safety**: You run in a single-turn, ephemeral runner. Any changes left on local disk will be destroyed. You MUST commit, push, and create a Pull Request for ANY modifications you make before ending your run.
-            1. Create a branch based on the clean, fully-synchronized master branch:
-               `git fetch origin master`
-               `git checkout -b ${{ fromJSON(needs.check-mention.outputs.result).branchName }} origin/master`
-               (unless requested to update an existing branch or PR, in which case check out and work on that branch)
+            1. Create a new branch for your work: `git checkout -b ${{ fromJSON(needs.check-mention.outputs.result).branchName }}`
             2. Make your changes and commit with descriptive messages
             3. Push the branch: `git push -u origin ${{ fromJSON(needs.check-mention.outputs.result).branchName }}`
             4. Create a PR targeting the current fork's master branch:
