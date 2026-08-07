@@ -318,6 +318,8 @@ jobs:
           echo "${{ github.workspace }}/.venv/bin" >> "$GITHUB_PATH"
 
       - name: Export GitHub token for gh CLI
+        env:
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
         run: |
           echo "GH_TOKEN=${{ steps.generate-token.outputs.token }}" >> "$GITHUB_ENV"
           echo "GH_REPO=${{ github.repository }}" >> "$GITHUB_ENV"
