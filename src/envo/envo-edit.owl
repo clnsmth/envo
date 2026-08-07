@@ -1,4 +1,4 @@
-Prefix(:=<http://purl.obolibrary.org/obo/envo.owl/>)
+Prefix(:=<http://purl.obolibrary.org/obo/envo.owl#>)
 Prefix(iso:=<https://www.iso.org/obp/ui/#iso:std:iso:>)
 Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
 Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
@@ -3981,6 +3981,7 @@ Declaration(Class(<http://purl.obolibrary.org/obo/ENVO_03605006>))
 Declaration(Class(<http://purl.obolibrary.org/obo/ENVO_03605007>))
 Declaration(Class(<http://purl.obolibrary.org/obo/ENVO_03605008>))
 Declaration(Class(<http://purl.obolibrary.org/obo/ENVO_03605009>))
+Declaration(Class(<http://purl.obolibrary.org/obo/ENVO_03622000>))
 Declaration(Class(<http://purl.obolibrary.org/obo/ENVO_04000000>))
 Declaration(Class(<http://purl.obolibrary.org/obo/ENVO_04000001>))
 Declaration(Class(<http://purl.obolibrary.org/obo/ENVO_04000002>))
@@ -4176,6 +4177,7 @@ Declaration(ObjectProperty(<http://purl.obolibrary.org/obo/ENVO_02500020>))
 Declaration(ObjectProperty(<http://purl.obolibrary.org/obo/ENVO_2000036>))
 Declaration(ObjectProperty(<http://purl.obolibrary.org/obo/ENVO_2100001>))
 Declaration(ObjectProperty(<http://purl.obolibrary.org/obo/ENVO_2100007>))
+Declaration(ObjectProperty(<http://purl.obolibrary.org/obo/RO_0000056>))
 Declaration(NamedIndividual(<http://purl.obolibrary.org/obo/ENVO_01001569>))
 Declaration(NamedIndividual(<http://purl.obolibrary.org/obo/ENVO_01001571>))
 Declaration(NamedIndividual(<http://purl.obolibrary.org/obo/ENVO_01001572>))
@@ -4254,6 +4256,7 @@ Declaration(AnnotationProperty(<http://purl.org/dc/elements/1.1/contributor>))
 Declaration(AnnotationProperty(<http://purl.org/dc/elements/1.1/creator>))
 Declaration(AnnotationProperty(<http://purl.org/dc/elements/1.1/date>))
 Declaration(AnnotationProperty(<http://purl.org/dc/elements/1.1/description>))
+Declaration(AnnotationProperty(<http://purl.org/dc/elements/1.1/source>))
 Declaration(AnnotationProperty(<http://purl.org/dc/elements/1.1/title>))
 Declaration(AnnotationProperty(<http://purl.org/dc/terms/license>))
 Declaration(AnnotationProperty(<http://purl.org/dc/terms/title>))
@@ -30220,7 +30223,7 @@ AnnotationAssertion(Annotation(<http://www.geneontology.org/formats/oboInOwl#has
 AnnotationAssertion(Annotation(<http://www.geneontology.org/formats/oboInOwl#hasDbXref> "USGS:SDTS") <http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym> <http://purl.obolibrary.org/obo/ENVO_01001209> "morass")
 AnnotationAssertion(Annotation(<http://www.geneontology.org/formats/oboInOwl#hasDbXref> "USGS:SDTS") <http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym> <http://purl.obolibrary.org/obo/ENVO_01001209> "muskeg")
 AnnotationAssertion(rdfs:label <http://purl.obolibrary.org/obo/ENVO_01001209> "wetland ecosystem"@en)
-SubClassOf(<http://purl.obolibrary.org/obo/ENVO_01001209> <http://purl.obolibrary.org/obo/ENVO_01001110>)
+SubClassOf(<http://purl.obolibrary.org/obo/ENVO_01001209> <http://purl.obolibrary.org/obo/ENVO_01001790>)
 SubClassOf(<http://purl.obolibrary.org/obo/ENVO_01001209> ObjectSomeValuesFrom(<http://purl.obolibrary.org/obo/BFO_0000051> ObjectIntersectionOf(<http://purl.obolibrary.org/obo/ENVO_01000635> ObjectSomeValuesFrom(<http://purl.obolibrary.org/obo/RO_0002473> ObjectIntersectionOf(<http://purl.obolibrary.org/obo/ENVO_00001998> ObjectSomeValuesFrom(<http://purl.obolibrary.org/obo/RO_0000086> <http://purl.obolibrary.org/obo/PATO_0001823>))))))
 
 # Class: <http://purl.obolibrary.org/obo/ENVO_01001210> (defence against flooding)
@@ -44900,6 +44903,14 @@ AnnotationAssertion(rdfs:label <http://purl.obolibrary.org/obo/ENVO_03605009> "f
 EquivalentClasses(<http://purl.obolibrary.org/obo/ENVO_03605009> ObjectIntersectionOf(<http://purl.obolibrary.org/obo/ENVO_01001789> ObjectSomeValuesFrom(<http://purl.obolibrary.org/obo/RO_0002507> <http://purl.obolibrary.org/obo/ENVO_03605007>)))
 SubClassOf(<http://purl.obolibrary.org/obo/ENVO_03605009> <http://purl.obolibrary.org/obo/ENVO_01001789>)
 
+# Class: <http://purl.obolibrary.org/obo/ENVO_03622000> (wetland biome)
+
+AnnotationAssertion(<http://purl.obolibrary.org/obo/IAO_0000115> <http://purl.obolibrary.org/obo/ENVO_03622000> "A wetland ecosystem which is undergoing climactic ecological succession.")
+AnnotationAssertion(<http://www.geneontology.org/formats/oboInOwl#hasDbXref> <http://purl.obolibrary.org/obo/ENVO_03622000> <https://doi.org/10.1038/s41586-025-09794-2>)
+AnnotationAssertion(rdfs:label <http://purl.obolibrary.org/obo/ENVO_03622000> "wetland biome")
+EquivalentClasses(<http://purl.obolibrary.org/obo/ENVO_03622000> ObjectIntersectionOf(<http://purl.obolibrary.org/obo/ENVO_01001209> ObjectSomeValuesFrom(<http://purl.obolibrary.org/obo/RO_0000056> <http://purl.obolibrary.org/obo/ENVO_01001827>)))
+SubClassOf(<http://purl.obolibrary.org/obo/ENVO_03622000> <http://purl.obolibrary.org/obo/ENVO_01001209>)
+
 # Class: <http://purl.obolibrary.org/obo/ENVO_04000000> (adfreezing)
 
 AnnotationAssertion(Annotation(<http://www.geneontology.org/formats/oboInOwl#hasDbXref> "https://www.merriam-webster.com/dictionary/adfreezing") <http://purl.obolibrary.org/obo/IAO_0000115> <http://purl.obolibrary.org/obo/ENVO_04000000> "Adfreezing is a freezing process during which two objects adhere to each other via ice.")
@@ -46954,7 +46965,7 @@ SubClassOf(<http://purl.obolibrary.org/obo/FOODON_03411013> <http://purl.obolibr
 AnnotationAssertion(rdfs:label <http://purl.obolibrary.org/obo/OBI_0000967> "container"@en)
 SubClassOf(<http://purl.obolibrary.org/obo/OBI_0000967> <http://purl.obolibrary.org/obo/OBI_0000968>)
 
-# Class: <http://purl.obolibrary.org/obo/OBI_0000968> (device)
+# Class: <http://purl.obolibrary.org/obo/OBI_0000968> (obsolete device)
 
 SubClassOf(<http://purl.obolibrary.org/obo/OBI_0000968> <http://purl.obolibrary.org/obo/ENVO_00003074>)
 
