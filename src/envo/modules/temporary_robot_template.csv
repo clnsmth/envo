@@ -1,0 +1,3 @@
+ontology ID,label,parent class,equivalent class,definition,definition cross reference,creation date,created by
+ID,AL rdfs:label@en,SC %,C %,AL IAO:0000115@en,>AI oboInOwl:hasDbXref SPLIT=|,AT oboInOwl:creation_date^^xsd:dateTime,AI oboInOwl:created_by
+ENVO:03622000,wetland biome,ENVO:01001209,'wetland ecosystem' and ('participates in' some 'climactic ecological succession'),A wetland ecosystem which is undergoing climactic ecological succession.,https://orcid.org/0000-0002-5004-3362,2026-08-07T14:39:00Z,https://orcid.org/0000-0002-5004-3362
