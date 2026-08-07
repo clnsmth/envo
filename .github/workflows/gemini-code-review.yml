@@ -180,36 +180,11 @@ jobs:
           GH_TOKEN: ${{ steps.generate-token.outputs.token }}
         run: gh pr checkout "${{ env.PR_NUMBER }}"
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - name: Set up Agent Environment
+        uses: ./.github/actions/setup-agent-env
         with:
-          node-version: 20
-
-      - name: Configure Git
-        run: |
-          git config --global user.name "${{ env.AGENT_NAME }}[bot]"
-          git config --global user.email "${{ env.AGENT_NAME }}[bot]@users.noreply.github.com"
-
-      - name: Create tools directory
-        run: mkdir -p "${{ env.TOOLS_DIR }}"
-
-      - name: Add tools to PATH
-        run: echo "${{ env.TOOLS_DIR }}" >> "$GITHUB_PATH"
-
-      - name: Add obo-scripts to PATH
-        run: |
-          git clone --depth 1 https://github.com/cmungall/obo-scripts.git "${{ env.TOOLS_DIR }}/obo-scripts"
-          echo "${{ env.TOOLS_DIR }}/obo-scripts" >> "$GITHUB_PATH"
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-
-      - name: Install Python tools
-        run: |
-          uv venv
-          . .venv/bin/activate
-          uv pip install aurelian "wrapt>=1.17.2"
-          echo "${{ github.workspace }}/.venv/bin" >> "$GITHUB_PATH"
+          github-token: ${{ steps.generate-token.outputs.token }}
+          compile-db: 'true'
 
       - name: Run Gemini Code Review
         id: review
@@ -228,8 +203,12 @@ jobs:
 
             Follow the repository instructions in `AGENTS.md`.
 
-            When you need to inspect ontology content in `src/envo/envo-edit.owl`, use ripgrep (`rg`) to search for classes or terms by ID (e.g. `ENVO_NNNNNNNN` with 8 digits):
-            - `rg "ENVO_NNNNNNNN" src/envo/envo-edit.owl`
+            When you need to inspect or query ontology content (such as verifying parent terms, checking for duplicates, or validating class hierarchies), ALWAYS use the OAK CLI (`runoak`) against the compiled local SQLite database:
+            - To look up a term: `runoak -i sqlite:src/envo/envo.db info ENVO:NNNNNNNN`
+            - To search for labels or synonyms: `runoak -i sqlite:src/envo/envo.db search 'marine environment'`
+            - To query term ancestors: `runoak -i sqlite:src/envo/envo.db ancestors ENVO:NNNNNNNN`
+
+            Do not run standard grep or raw text searches over OWL XML files as they are slow and highly inaccurate.
 
             Focus on:
             - Hierarchy and proposed parents being environmentally and logically consistent

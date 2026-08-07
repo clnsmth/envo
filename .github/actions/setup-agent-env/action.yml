@@ -1,0 +1,71 @@
+name: 'Set up Agent Environment'
+description: 'Sets up Git, Node.js, obo-scripts, uv, python dependencies, and compiles SemSQL database'
+inputs:
+  github-token:
+    description: 'GitHub token for API access'
+    required: true
+  compile-db:
+    description: 'Whether to compile the SemSQL database'
+    required: false
+    default: 'true'
+runs:
+  using: 'composite'
+  steps:
+    - name: Configure Git
+      shell: bash
+      run: |
+        git config --global user.name "clnsmth-ontology-agent[bot]"
+        git config --global user.email "clnsmth-ontology-agent[bot]@users.noreply.github.com"
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - name: Create tools directory
+      shell: bash
+      run: mkdir -p "${{ github.workspace }}/tools"
+
+    - name: Add tools to PATH
+      shell: bash
+      run: echo "${{ github.workspace }}/tools" >> "$GITHUB_PATH"
+
+    - name: Add obo-scripts to PATH
+      shell: bash
+      run: |
+        git clone --depth 1 https://github.com/cmungall/obo-scripts.git "${{ github.workspace }}/tools/obo-scripts"
+        echo "${{ github.workspace }}/tools/obo-scripts" >> "$GITHUB_PATH"
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v7
+
+    - name: Install Python tools
+      shell: bash
+      run: |
+        uv venv
+        . .venv/bin/activate
+        uv pip install aurelian jinja2-cli "wrapt>=1.17.2" oaklib
+        echo "${{ github.workspace }}/.venv/bin" >> "$GITHUB_PATH"
+
+    - name: Configure gh CLI
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.github-token }}
+      run: |
+        echo "GH_TOKEN=${{ inputs.github-token }}" >> "$GITHUB_ENV"
+        echo "GH_REPO=${{ github.repository }}" >> "$GITHUB_ENV"
+        gh repo set-default ${{ github.repository }}
+
+    - name: Compile ENVO SQLite Database
+      if: ${{ inputs.compile-db == 'true' }}
+      shell: bash
+      run: |
+        cd src/envo
+        if command -v semsql >/dev/null 2>&1; then
+          echo "Running inside ODK container; executing semsql directly."
+          semsql make envo.db
+        else
+          echo "Running on host; executing semsql via run.sh (Docker)."
+          chmod +x run.sh
+          ./run.sh semsql make envo.db
+        fi

@@ -202,3 +202,16 @@ When a curator requests mapping an issue containing an "EDI Annotation Studio Ne
   - Formulate OBO-compliant genus-differentia definitions starting with a lowercase parent term.
   - Output the mapped request exactly as a copy-pasteable ENVO New Term Request markdown block for the upstream tracker, rather than a table.
     - **CRITICAL**: NEVER output the local repository issue thread URL in the 'Term Tracker Item' field. You must ALWAYS output exactly the literal boilerplate string: `[To be filled in with the ENVO issue URL]`.
+
+
+## 15. Specialized Multi-Agent Profiles
+To maintain high logical quality and delegate specific curation tasks, our AI ontology agent system utilizes 7 distinct, specialized subagent profiles defined under `.agents/agents/`. When handling issue requests, the agent harness references these custom system prompts and instructions:
+
+1. **`task-coordinator.md`**: The master planning and orchestration agent. Used at the start of any task to analyze requests, distinguish creation vs. modification, plan subagent execution sequences, and verify that final merge validations are scheduled.
+2. **`deep-research-specialist.md`**: Specialized in literature review. When external references (PMIDs, DOIs, URLs) are provided, this profile fetches and parses the reference abstracts or full text using `aurelian` or web searches to draft accurate, scientifically grounded definitions.
+3. **`design-pattern-advisor.md`**: Responsible for Dead Simple OWL Design Pattern (DOSDP) template compliance. Inspects templates in `src/envo/patterns/` (such as `biome.yaml`, `ecosystem.yaml`, or `atmospheric_material_subtype.yaml`) and ensures any new assertions adhere strictly to pattern schemas.
+4. **`identifier-validator.md`**: Guards the ontology against hallucinated or malformed identifiers. Formally verifies PMID format and existence, checks database cross-references (CHEBI, NCBITaxon, FoodOn, Wikidata) using Bioregistry lookups, and flags inconsistent or inactive external references.
+5. **`metadata-checker.md`**: Performs strict metadata validation on new or modified terms. Confirms the presence of mandatory annotations, such as `created by` (full curator ORCID URL), `creation date` (ISO 8601 timestamp), correct label casing, and `term_tracker_item` links.
+6. **`ontology-reasoner.md`**: The logical consistency gatekeeper. Executes standard reasoning tests via `make test`, diagnoses unsatisfiable classes and conflicting axioms using `robot explain`, and suggests logical restructuring or axiom edits to resolve conflicts.
+7. **`ontology-term-lookup.md`**: Handles semantic lookup, synonyms, and class searches. Queries the compiled SemSQL SQLite database (`src/envo/envo.db`) using the OAK CLI (`runoak`) to detect duplicates and Candidate parent classes.
+

@@ -266,16 +266,6 @@ jobs:
           fetch-depth: 1
           token: ${{ steps.generate-token.outputs.token }}
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Configure Git
-        run: |
-          git config --global user.name "${{ env.AGENT_NAME }}[bot]"
-          git config --global user.email "${{ env.AGENT_NAME }}[bot]@users.noreply.github.com"
-
       - name: Sync Fork Master with Upstream
         run: |
           git remote add upstream https://github.com/EnvironmentOntology/envo.git || true
@@ -284,46 +274,11 @@ jobs:
           git push origin master --force
           git checkout -
 
-      - name: Create tools directory
-        run: mkdir -p "${{ env.TOOLS_DIR }}"
-
-      - name: Add tools to PATH
-        run: echo "${{ env.TOOLS_DIR }}" >> "$GITHUB_PATH"
-
-      - name: Add obo-scripts to PATH
-        run: |
-          git clone --depth 1 https://github.com/cmungall/obo-scripts.git "${{ env.TOOLS_DIR }}/obo-scripts"
-          echo "${{ env.TOOLS_DIR }}/obo-scripts" >> "$GITHUB_PATH"
-          
-      - name: Compile ENVO SQLite Database
-        run: |
-          cd src/envo
-          if command -v semsql >/dev/null 2>&1; then
-            echo "Running inside ODK container; executing semsql directly."
-            semsql make envo.db
-          else
-            echo "Running on host; executing semsql via run.sh (Docker)."
-            chmod +x run.sh
-            ./run.sh semsql make envo.db
-          fi
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-
-      - name: Install Python tools
-        run: |
-          uv venv
-          . .venv/bin/activate
-          uv pip install aurelian jinja2-cli "wrapt>=1.17.2" oaklib
-          echo "${{ github.workspace }}/.venv/bin" >> "$GITHUB_PATH"
-
-      - name: Export GitHub token for gh CLI
-        env:
-          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
-        run: |
-          echo "GH_TOKEN=${{ steps.generate-token.outputs.token }}" >> "$GITHUB_ENV"
-          echo "GH_REPO=${{ github.repository }}" >> "$GITHUB_ENV"
-          gh repo set-default ${{ github.repository }}
+      - name: Set up Agent Environment
+        uses: ./.github/actions/setup-agent-env
+        with:
+          github-token: ${{ steps.generate-token.outputs.token }}
+          compile-db: 'true'
 
 
       - name: Run Gemini CLI
