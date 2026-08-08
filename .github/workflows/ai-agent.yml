@@ -268,7 +268,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
         with:
-          ref: master
           fetch-depth: 0
           token: ${{ steps.generate-token.outputs.token }}
 
@@ -308,7 +307,9 @@ jobs:
             MAKING CHANGES:
             If you need to modify files:
             - **Ephemeral Runner Safety**: You run in a single-turn, ephemeral runner. Any changes left on local disk will be destroyed. You MUST commit, push, and create a Pull Request for ANY modifications you make before ending your run.
-            1. Create a new branch for your work: `git checkout -b ${{ fromJSON(needs.check-mention.outputs.result).branchName }}`
+            1. Create a new branch for your work based on the clean master branch:
+               `git checkout master`
+               `git checkout -b ${{ fromJSON(needs.check-mention.outputs.result).branchName }}`
             2. Make your changes and commit with descriptive messages
             3. Push the branch: `git push -u origin ${{ fromJSON(needs.check-mention.outputs.result).branchName }}`
             4. Create a PR targeting the current fork's master branch:
