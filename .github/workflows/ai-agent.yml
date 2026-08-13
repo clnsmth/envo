@@ -332,6 +332,18 @@ jobs:
             - Triggered by: @${{ fromJSON(needs.check-mention.outputs.result).user }}
             - Run: [View workflow run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
             ```
+      - name: Post response to GitHub issue/PR
+        if: always() && steps.gemini.outputs.summary != ''
+        env:
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+          AGENT_SUMMARY: ${{ steps.gemini.outputs.summary }}
+        run: |
+          # Write the environment variable safely to a file to prevent shell injection or heredoc issues
+          python3 -c 'import os; open("agent_response.md", "w").write(os.environ["AGENT_SUMMARY"])'
+          
+          # Post the comment using GitHub CLI (gh comment works on both issues and PRs)
+          gh issue comment "${{ fromJSON(needs.check-mention.outputs.result).itemNumber }}" --body-file agent_response.md
+
 
       - name: Restore actions directory for cleanup
         if: always()
