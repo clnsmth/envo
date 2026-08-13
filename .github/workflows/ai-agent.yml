@@ -316,11 +316,9 @@ jobs:
                `gh pr create --repo ${{ github.repository }} --base master` with a clear title and description
 
             COMMUNICATING:
-            - Use `gh` CLI directly to interact with the user on GitHub
-            - Use `gh issue comment` or `gh pr comment` to post updates
-            - Always inform the user what you did (or could not do)
-            - If you created a PR, reference it in your comment on the original issue or PR
-            - If the request is ambiguous, ask a clarifying question via `gh`
+            - AUTOMATIC COMMENTING: Your final text response (your summary of actions, answers, or questions) will be automatically posted back to the GitHub issue/PR thread by the workflow. You do NOT need to run `gh issue comment` or `gh pr comment` for your final response.
+            - Only use `gh` manually if you need to post an intermediate progress update or ask an urgent clarifying question before finishing your run.
+            - In your final response, always clearly inform the user what you did (or could not do) and reference any PRs you created, so it is fully captured in the automated comment.
 
             SIGNATURE:
             Always include the following signature block in commit messages and GitHub comments:
