@@ -59,7 +59,11 @@ The repository was moved to this location from https://code.google.com/p/envo/ i
 ## AI-Assisted Curation Suite
 The ENVO repository features an integrated AI-Assisted Curation Agent: **`@clnsmth-ontology-agent`**. This agent is built to assist human curators with repetitive workflow tasks, validation, and schema transformations.
 
+> [!NOTE]
+> **Branch & Workflow Setup**: AI curation features and workflows operate on the `ai-curation` branch (which has been set as the repository's default branch so GitHub Actions and agentic workflows operate). The `master` branch remains clean and stays in sync with the upstream repository (`EnvironmentOntology/envo`).
+
 ### Key Capabilities
+* **Automated Term Creation & Modification**: Researches, defines, and adds or modifies ontology terms in `envo-edit.owl` via ROBOT CSV templates, verifies parents and design patterns, assigns IDs from allocated ranges, validates reasoner consistency (`make test`), and creates dedicated PRs.
 * **On-Demand AI Code Review**: Reviews pull requests for structural, logical, and style consistency, including checking hierarchy, definitions, and obsolescence handling on-demand.
 * **EDI Term Request Mapping**: Converts incoming EDI Annotation Studio term requests into copy-pasteable ENVO-ready new term issues.
 * **Intelligent Missing-Field Recovery**: Proactively drafts OBO-compliant genus-differentia definitions and couples them to active, validated Wikipedia/glossary webpage references.
@@ -68,6 +72,12 @@ The ENVO repository features an integrated AI-Assisted Curation Agent: **`@clnsm
 
 ### How to Interact
 Authorized curators can trigger the agent on any GitHub issue or PR by commenting:
+* To create a new ontology term:
+> `@clnsmth-ontology-agent please create a new term for <term label> with definition <definition> and parent <parent>`
+
+* To modify or update an existing term:
+> `@clnsmth-ontology-agent please update <ENVO:ID> to add <synonym/parent/definition>`
+
 * To map an EDI request:
 > `@clnsmth-ontology-agent please map this to an ENVO new term request`
 
